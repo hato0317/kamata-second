@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        jQuery(function($){
+            $('.menu').on('click',function(){
+                if($('.headerContents').hasClass('is-active')){
+                    $('.headerContents').removeClass('is-active');
+                    $('.menu').css('color','black');
+                }else{
+                    $('.headerContents').addClass('is-active')
+                    $('.menu').css('color','white');
+                }//menuクリックで左に隠れてるheaderを表示しハンバーガーを白にして再度クリックでもとに戻す
+            });
+            $('#eupho').on('click',function(){
+                $('#eupho').fadeOut(2000);
+                $('.textShow').fadeOut(2000).queue(function(){
+                    this.empty();
+                });//DOMからも削除して再度hoverしても表示しない
+            });
+            $('#eupho').hover(function(){
+                $('.textShow').fadeIn(3000);
+            });
+            $('.aboutButton').on('click',function(){
+                $('.category').slideToggle();//カテゴリの表示非表示
+                $('.active').slideToggle();//aboutのテキスト表示
+
+                if($(this).text() ==='about'){
+                    $(this).text('カテゴリ');
+                }else{
+                    $(this).text('about');
+                }//ボタンのテキスト切り替え
+            });
+            $(function(){
+                var pagetop = $('#topButton');
+                // ボタン非表示
+                pagetop.hide();
+                // 100px スクロールしたらボタン表示
+                 $(window).scroll(function () {
+                 if ($(this).scrollTop() > 100) {
+                     pagetop.fadeIn();
+                 } else {
+                     pagetop.fadeOut();
+                 }
+                 });
+                 pagetop.click(function () {
+                 $('body, html').animate({ scrollTop: 0 }, 500);
+                 return false;
+                 });
+                });
+        });
+    </script>
+    <header>
+        <div class="menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="headerContents">
+            <div class="logoWrapper">
+                <img id="logo"src="logo.png">
+            </div>
+                <button class="aboutButton">about</button>
+                <div class="category">
+                    <a id="music"><img src="category.png"></a>
+                    <a id="culture"><img src="category.png"></a>
+                    <a id="travel"><img src="category.png"></a>
+                    <a id="kyoto"><img src="category.png"></a>
+                    <a id="life"><img src="category.png"></a>
+                    <a id="others"><img src="category.png"></a>
+                </div>   
+                <div class="active">
+                    <p style="font-size: 12px;">
+                        2015年とある音楽サークルにて、夏休みに吹奏楽を鑑賞しに行くための集団として結成。
+                        自ら楽曲を制作し学祭で演奏を行うなど、最初の２年間だけは精力的な活動を行う。
+                        2017年以降は温泉やピクニックが活動の主となっており当初の目的は完全に形骸化してしまっている。
+                    </p>
+                </div> 
+        </div>
+    </header>
+    <div class="mainWrapper-eupho">
+        <img id="eupho" src="eupho.png">
+        <div class="textShow">
+            <p>clickでユーフォニアムを消滅させることが可能です</p>
+        </div>
+    </div>
+    <div id="topButton">
+        <a href="#">TOP</a>
+    </div>
+    <footer>
+        <div class="footerWrapper">
+            <span class="sns">
+                <a alt="Twitterのリンク" href="https://twitter.com/KamataOrchestra" ><i class="fab fa-twitter"></i></a>
+                <a alt="bandcampのリンク" href="https://kamataorchestra.bandcamp.com/releases"><i class="fab fa-bandcamp"></i></a>
+            </span>
+            <p>© Copyright 2020 KamataOrchestra</p>
+        </div>
+    </footer>
+</body>
+</html>
